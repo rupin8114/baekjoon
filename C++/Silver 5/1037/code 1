@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+
+int main() {
+  int number;
+  std::cin >> number;
+  //입력
+  std::vector<int> measure;
+  int temp=0;
+  for(int i=0; i<number; i++){
+    std::cin >> temp;
+    measure.push_back(temp);
+  }
+  //계산
+  if(number == 1) std::cout << (long int)temp * (long int)temp;
+  else{
+    int smallest=1000000, biggest=0;
+    for(int i=0; i<measure.size(); i++){
+      if(measure[i]<smallest) smallest = measure[i];
+      if(measure[i]>biggest) biggest = measure[i];
+    }
+    std::cout << (long int)smallest * (long int) biggest;
+  }
+}
