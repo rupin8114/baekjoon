@@ -1,0 +1,15 @@
+#include <iostream>
+
+int main() {
+int Testcase,N,M;
+  std::cin >> Testcase;
+  for(int i=0; i < Testcase; i++){
+    std::cin >> N >> M;
+    long int count = 1;
+    for(int i=1; i<=M-N; i++){
+      count *= (M-i+1);
+      count = count / i;
+    }
+    std::cout << count << std::endl;
+  }
+}
