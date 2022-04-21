@@ -1,0 +1,26 @@
+#include <iostream>
+
+int main() {
+  int Testcase;
+  int x_1,y_1,r_1,x_2,y_2,r_2;
+  int square, sum, sub;
+  std::cin >> Testcase;
+  for(int i=0; i<Testcase; i++){
+    std::cin >> x_1 >> y_1 >> r_1 >> x_2 >> y_2 >> r_2;
+    if((x_1 == x_2) && (y_1 == y_2)){
+      if((r_1 == 0) && (r_2 == 0)) std::cout << 1 << std::endl;
+      else if(r_1 == r_2) std::cout << -1 << std::endl;
+      else std::cout << 0 << std::endl;
+    }
+    else{
+      square = (x_1 - x_2) * (x_1 - x_2) + (y_1 - y_2) * (y_1 - y_2);
+      sum = (r_1 + r_2) * (r_1 + r_2);
+      sub = (r_1 - r_2) * (r_1 - r_2);
+      if(sum < square) std::cout << 0 << std::endl;
+      else if(sum == square) std::cout << 1 << std::endl;
+      else if(sum > square && sub < square) std::cout << 2 << std::endl;
+      else if(sub == square) std::cout << 1 << std::endl;
+      else std::cout << 0 << std::endl;
+    }
+  }
+}
