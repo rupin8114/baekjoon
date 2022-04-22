@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+
+bool okay(int object){
+  int one = object % 10;
+  if(object <= 10 || object >= 90 || one == 0 || one == 9) return false;
+  else return true;
+}
+
+int move(int king, int rock){
+  int total,where = 0;
+  std::string coor;
+  
+  std::cin >> coor;
+  //좌표계산
+  for(int i=0; i<coor.length(); i++){
+    if(coor.at(i) == 'R') where += 10;
+    else if(coor.at(i) == 'L') where += -10;
+    else if(coor.at(i) == 'B') where += -1;
+    else where += 1;
+  }
+  //돌의 움직임
+  if(king + where == rock){
+    if(okay(rock + where)){
+      rock += where;
+      king += where;
+    }
+    else;
+  }
+  else{
+    if(okay(king + where)) king += where;
+  }
+  total = 100 * king + rock;
+  return total;
+}
+
+int main() {
+  std::string king,rock;
+  int kingcoor = 0, rockcoor = 0, number;
+  std::cin >> king >> rock >> number;
+//초기 배치
+  kingcoor = 10*(int(king.at(0))-64) + int(king.at(1)) - 48;
+  rockcoor = 10*(int(rock.at(0))-64) + int(rock.at(1)) - 48;
+//움직이는 함수 호출
+  int last = 0;
+  for(int i=0; i<number; i++){
+    last = move(kingcoor, rockcoor);
+    kingcoor = last/100;
+    rockcoor = last%100;
+  }
+//최종 배치 및 출력
+  king.at(0) = char((kingcoor/10) + 64);
+  king.at(1) = char(kingcoor%10 + 48);
+  rock.at(0) = char((rockcoor/10)+64);
+  rock.at(1) = char(rockcoor%10 + 48);
+  std::cout << king << std::endl << rock;
+}
