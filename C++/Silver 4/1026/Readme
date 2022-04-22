@@ -1,0 +1,6 @@
+하.. double free or corruption (out) 때문에 상당히 힘들었다.
+https://www.cplusplus.com/forum/beginner/262948/ 에서 배운 점
+double free or corruption abortion은 C++에서 선언한 vector 같은 곳의 iterator, 즉 포인터가
+2번 이상 free 되거나, vector의 내용이 바뀌면 iterator가 invalidate 되는데 이를 간과하고 재사용하면 일어난다.
+
+B 안바꾸고 정렬하는 것도 생각보다 힘들었다. 분명 더 똑똑한 방법이 있을텐데..
