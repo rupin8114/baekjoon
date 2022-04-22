@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  int number;
+  std::cin >> number;
+//입력
+  std::vector<int> A;
+  std::vector<int> B;
+  int pass;
+  for(int i=0; i<number; i++){
+    std::cin >> pass;
+    A.push_back(pass);
+  }
+  for(int i=0; i<number; i++){
+    std::cin >> pass;
+    B.push_back(pass);
+  }
+ //정렬
+  std::vector<int> Bsizeorder;
+  std::vector<int> newA;
+  //newA에 A를 오름차순으로 정렬
+  for(std::vector<int>::iterator A_itr=A.begin(); A_itr!=A.end(); A_itr++){
+    if(A_itr == A.begin()) newA.push_back(*A_itr);
+    else{
+      int temp = newA.size();
+      for(int i=0; i<temp; i++){
+        if(*(newA.begin()+i) >= *A_itr){
+          newA.insert(newA.begin()+i,*A_itr);
+          break;
+        }
+        if(i == temp-1) newA.push_back(*A_itr);
+      }
+    }
+  }
+  //Bsizeorder 초기화
+  for(int i=0; i<number; i++) Bsizeorder.push_back(-1);
+  //Bsizeorder 에 A 원소 채우기
+  std::vector<int>::iterator Bsizeorder_itr = Bsizeorder.begin();
+  std::vector<int>::iterator B_itr = B.begin();
+  std::vector<int>::iterator newA_itr = newA.begin();
+  for(int i=0; i<number; i++){
+    int temp = -1;
+    int largest = -1;
+    Bsizeorder_itr = Bsizeorder.begin();
+    for(int j=0; j<number; j++){
+      if(largest < *(B_itr+j) && *(Bsizeorder_itr+j) == -1){
+        largest = *(B_itr+j);
+        temp = j;        
+      }
+    }
+    *(Bsizeorder_itr + temp) = *(newA_itr+i);
+  }
+  //출력
+  Bsizeorder_itr = Bsizeorder.begin();  
+  int sum = 0;
+  Bsizeorder_itr = Bsizeorder.begin();
+  for(std::vector<int>::iterator B_itr=B.begin(); B_itr!=B.end(); ++B_itr){
+    sum += (*B_itr) * (*Bsizeorder_itr);
+    Bsizeorder_itr += 1;
+  }
+  std::cout << sum << std::endl;
+}
