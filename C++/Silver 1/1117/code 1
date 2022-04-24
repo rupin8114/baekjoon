@@ -1,0 +1,27 @@
+#include <iostream>
+
+int main() {
+  int W, H, f, c, x_1, y_1, x_2, y_2, mul, ydiff, xcount, oriW;
+  std:: cin >> W >> H >> f >> c >> x_1 >> y_1 >> x_2 >> y_2;
+  long int orisize = (long int)W * (long int)H;
+  oriW = W;
+  //2,1 경계선 찾기
+  int xdivide;
+  if(2*f <= W){
+    xdivide = f;
+    W = W-f;
+  }
+  else{
+    xdivide = W-f;
+    W = f;
+  }
+  //작아진 직사각형과 배율 맞추기
+  mul = c+1;
+  H = H/mul;
+  //계산
+  ydiff = y_2 - y_1;
+  if(x_2 <= xdivide) xcount = 2 * (x_2 - x_1);
+  else if(x_1>=xdivide) xcount = x_2 - x_1;
+  else xcount = 2 * (xdivide - x_1) + (x_2 - xdivide);
+  std::cout << orisize - (long int)xcount * (long int)ydiff * (long int)mul;
+}
