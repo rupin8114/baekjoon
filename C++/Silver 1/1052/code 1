@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cmath>
+
+int main() {
+  int N, time, here, additional = 0;
+  int bottle[26] = { };
+  int least[26] = {};
+  std::cin >> N >> time;
+  bottle[0] = N;
+  //최대로 합치기
+  for(int i=0; i<25; i++){
+    bottle[i+1] = bottle[i] / 2;
+    bottle[i] = bottle[i] % 2;
+    if(bottle[i+1] == 0) break;
+  }
+  //현재 물병 수
+  int now = 0;
+  for(int i=0; i<25; i++) now += bottle[i];
+  //횟수에 따른 최종 물병 형태
+  for(int i=0; i<25; i++) least[i] = bottle[i];
+  if(now <= time){std::cout << 0;}
+  else{
+    additional = now - time;
+    int count = 0;
+    for(int i=0; i<25; i++){
+      if(least[i]==1){
+        least[i]=0;
+        if(count == additional){
+          least[i+1] += 1; //굳이 배열을 고칠 필요는 없다.
+          here = i + 1;
+          break;
+        }
+        count++;
+      }
+    }
+    //추가 필요량 계산
+  additional = pow(2, here);
+  for(int i=0; i<here;i++)
+    if(bottle[i] == 1) additional -= pow(2, i);
+  std::cout << additional;
+  }
+}
