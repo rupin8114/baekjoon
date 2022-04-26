@@ -1,0 +1,33 @@
+#include <iostream>
+
+int main() {
+  int x, add = 0;
+  long comp, z, y, temp=0;
+  std::cin >> x >> y;
+  z = (y * 100)/x;
+  if(z>=99)std::cout << -1;
+  else{
+    for(int i=0;;i++){
+      comp = ((y+i*1000000)*100)/(x+i*1000000);
+      if(comp > z){
+        temp += (i-1)*1000000;
+        break;
+      }
+    }
+    for(int i=0;;i++){
+      comp = ((y+temp+i*1000)*100)/(x+temp+i*1000);
+      if(comp > z){
+        temp += (i-1)*1000;
+        break;
+      }
+    }
+    for(int i=0;;i++){
+      comp = ((y+temp+i)*100)/(x+temp+i);
+      if(comp > z){
+        temp += i;
+        break;
+      }
+    }
+    std::cout << temp;
+  }
+}
