@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  int number, count, total;
+  scanf("%d", &number);
+  std::vector<int> arr(number);
+  for(int i=0; i<number; i++) scanf("%d",&arr.at(i));
+  sort(arr.begin(),arr.end());
+  count=0;
+  total = 0;
+  number = number-1;
+  while(number>0){
+    if(number-arr.at(count)-1 >= 0){
+      number = number - arr.at(count) - 1;
+      total += arr.at(count);
+      count++;
+    }
+    else break;
+  }
+  printf("%d",total+number);
+}
