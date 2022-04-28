@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+
+int main() {
+  int testcase, B, X, Y;
+  scanf("%d", &testcase);
+  for(int i=0; i<testcase; i++){
+    std::vector<int> arr(23);
+    std::vector<int>::iterator arr_itr = arr.begin();
+    int total = 0, count = 1;
+    scanf("%d %d %d", &B, &X, &Y);
+    while(X > 0 || Y > 0){
+      *arr_itr = ((X%B) + (Y%B)) % B;
+      X = X/B;
+      Y = Y/B;
+      arr_itr += 1;
+    }
+    for(arr_itr = arr.begin(); arr_itr != arr.end(); arr_itr++){
+      total += *arr_itr * count;
+      count = count * B;
+    }
+    printf("%d\n", total);
+  }
+}
