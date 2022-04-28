@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+
+int main() {
+  int number,temp,state=0,count=0,largest=0;
+  std::cin >> number;
+  std::vector<int> arr;
+  for(int i=0; i<number; i++){
+    std::cin >> temp;
+    arr.push_back(temp);
+  }
+  //state에 따른 행동 0이면 같은 수 1이면 오르막 -1이면 내리막
+  std::vector<int>::iterator itr = arr.begin();
+  std::vector<int>::iterator largestitr = arr.begin();
+  for(itr=arr.begin();itr<arr.end();itr++){
+    count++;
+    if((itr+1) != arr.end()){
+      if(state == 0){
+        if(*itr > *(itr+1)){
+          state = -1; //내리막
+          largestitr = itr;
+          largest = count;
+        }
+        else if(*itr == *(itr+1)){
+          std::cout << count << std::endl;
+        }
+        else{
+          state = 1; //오르막
+        }
+      }
+      else if(state == 1){
+        largestitr = itr;
+        largest = count;
+        if(*itr < *(itr+1)){
+        }
+        else if(*itr == *(itr+1)){
+          state = 0;
+          std::cout << largest << std::endl;
+        }
+        else{
+          state = -1;
+        }
+      }
+      else{
+        if(*itr <= *(itr+1)){
+          state = 0;
+          std::cout << largest << std::endl;
+        }
+      }
+    }
+    else{
+      if(state == 0) std::cout << count << std::endl;
+      else if(state == -1) std::cout << largest << std::endl;
+      else std::cout << count << std::endl;
+    }
+  }
+}
