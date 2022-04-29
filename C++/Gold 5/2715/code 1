@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+
+void flip(std::vector<int> &arr, int count){
+  std::vector<int> temp;
+  for(int i=0; i<count; i++){
+    temp.push_back(-1*arr.at(count-(i+1)));
+  }
+  for(int i=0; i<count; i++){
+    arr.at(i) = temp.at(i);
+  }
+}
+
+int main(){
+  int testcase;
+  scanf("%d", &testcase);
+  for(int i=0;i<testcase;i++){
+    //입력
+    int number,temp;
+    scanf("%d", &number);
+    std::vector<int> arr;
+    std::vector<int> answer;
+    for(int j=0;j<number;j++){
+      scanf("%d", &temp);
+      arr.push_back(temp);
+    }
+    //정렬
+    for(int j=number;j>0;j--){
+      if(arr.at(j-1)==j){}
+      else{
+        if(arr.at(0)!=-j && arr.at(0)!=j){
+          for(int k=0;k<j;k++){
+            if(arr.at(k)==j||arr.at(k)==-j){
+              flip(arr,k+1);
+              answer.push_back(k+1);
+              break;
+            }
+          }
+        }
+        if(arr.at(0)==j){
+          flip(arr, 1);
+          answer.push_back(1);
+        }
+        flip(arr,j);
+        answer.push_back(j);
+      }
+    }
+    //출력
+    printf("%d ", int(answer.size()));
+    for(int j=0;j<answer.size();j++) {printf("%d ",answer.at(j));}
+    printf("\n");
+  }
+}
