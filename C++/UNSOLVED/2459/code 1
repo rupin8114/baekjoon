@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main(){
+  int size, number, a, b;
+  scanf("%d", &size);
+  scanf("%d", &number);
+  vector<int> x(number+2);
+  vector<int> y(number+2);
+  //입력
+  for(int i=1; i<number+1; i++){
+    scanf("%d %d", &a, &b);
+    x.at(i)=a;
+    y.at(i)=b;
+  }
+  x.at(0) = 1;
+  y.at(0) = 1;
+  x.at(number + 1) = 1;
+  y.at(number + 1) = 1;
+  float cut;
+  scanf("%f", &cut);
+  cut += 0.5;
+  //가로세로판단
+  int rc = 0;
+  if(x.at(0)==x.at(1)) rc = 1;
+  //최대길이계산
+  float length = 0, largest = 0, temp;
+  for(int i=0; i<number+1; i++){
+    if((i+rc)%2 == 0){
+      if((x.at(i)<cut && x.at(i+1)>cut)||(x.at(i)>cut && x.at(i+1)<cut)){
+        length += abs(float(x.at(i))-cut);
+        printf("%f\n",length);
+        if(i==0) temp = length;
+        if(i==number) length += temp;
+        if(largest < length) largest = length;
+        length = abs(float(x.at(i+1))-cut);
+        printf("%f\n",length);
+      }
+      else{
+        length += abs(float(x.at(i))-float(x.at(i+1)));
+        printf("%f\n",length);
+        if(i==0) temp = length;
+        if(i==number) length+=temp;
+        if(largest < length) largest = length;
+      }
+    }
+    else{
+      length += abs(float(y.at(i))-float(y.at(i+1)));
+      printf("%f\n",length);
+      if(i==0) temp = length;
+      if(i==number) length += temp;
+      if(largest < length) largest = length;
+    }
+  }
+  printf("%d", int(largest));
+}
+//G5 2459
