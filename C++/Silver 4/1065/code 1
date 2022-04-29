@@ -1,0 +1,16 @@
+#include <iostream>
+
+bool compare(int i){
+  if(((i/100)-((i/10)%10)) == ((i/10)%10 - i%10)) return true;
+  else return false;
+}
+
+int main(){
+  int count=0,n;
+  scanf("%d", &n);
+  for(int i=1;i<n+1;i++){
+    if(i<100) count++;
+    else count+=compare(i);
+  }
+  printf("%d", count);
+}
