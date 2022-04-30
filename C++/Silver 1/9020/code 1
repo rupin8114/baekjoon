@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+
+void isprime(int arr[]){
+  for(int i=2;i<10000;i++){
+    int count = i;
+    if(arr[i]!=0){
+      while(count<10000){
+        count += i;
+        if(count<10000) arr[count]=0;
+      }
+    }
+  }
+}
+
+int main(){
+  int arr[10000] = {};
+  for(int i=0;i<10000;i++){
+    arr[i]=i;
+  }
+  isprime(arr);
+  std::vector<int> prime;
+  
+  for(int i=2;i<10000;i++) if(arr[i]!=0)prime.push_back(i);
+  
+  int testcase,n;
+  scanf("%d",&testcase);
+  
+  for(int i=0;i<testcase;i++){
+    int count=0,smallest = 0;
+    scanf("%d",&n);
+    std::vector<int>::iterator itr = prime.begin();
+    while(prime.at(count)<=(n/2)){
+      for(itr=prime.begin();itr!=prime.end();itr++){
+        if(*itr == n-prime.at(count)) smallest = prime.at(count);
+      }
+      count++;
+    }
+    printf("%d %d\n",smallest,n-smallest);
+  }
+}
