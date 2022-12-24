@@ -1,0 +1,47 @@
+#include <iostream>
+#include <stdlib.h>
+
+void baechoo(int ** farm, int H, int W, int x, int y){
+  farm[y][x] = 0;
+  if(x-1>=0 && farm[y][x-1]==1) baechoo(farm, H, W, x-1, y);
+  if(y-1>=0 && farm[y-1][x]==1) baechoo(farm, H, W, x, y-1);
+  if(x+1<W && farm[y][x+1]==1) baechoo(farm, H, W, x+1, y);
+  if(y+1<H && farm[y+1][x]==1) baechoo(farm, H, W, x, y+1);
+}
+
+int main() {
+  int Testcase;
+  scanf("%d",&Testcase);
+  while((Testcase--)>0){
+    int W, H, worm;
+    scanf("%d %d %d", &W, &H, &worm);
+    
+    int **farm;
+    farm = (int**)calloc(H,sizeof(int*));
+    for(int i=0; i<H; i++){
+      farm[i] = (int*)calloc(W,sizeof(int));
+    }
+    
+    int x, y;
+    for(int i=0; i<worm; i++){
+      scanf("%d %d",&x ,&y);
+      farm[y][x] = 1;
+    }
+
+    int count=0;
+    for(int i=0; i<H; i++){
+      for(int j=0; j<W; j++){
+        if(farm[i][j]==1){
+          baechoo(farm, H, W, j, i);
+          count++;
+        }
+      }
+    }
+    printf("%d\n", count);
+
+    for(int i=0; i<H; i++){
+      free(farm[i]);
+    }
+    free(farm);
+  }
+}
