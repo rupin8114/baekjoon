@@ -1,0 +1,29 @@
+#include <iostream>
+
+int main() {
+  int stri, brand;
+  scanf("%d %d", &stri, &brand);
+  int mini6 = 10000, mini = 10000;
+  int temp6, temp;
+  for (int i = 0; i < brand; i++) {
+    scanf("%d %d", &temp6, &temp);
+    if (mini6 > temp6)
+      mini6 = temp6;
+    if (mini > temp)
+      mini = temp;
+  }
+  int diff;
+  diff = mini6 / mini;
+  diff++;
+
+  if (mini6 > 6 * mini)
+    printf("%d", mini * stri);
+  else {
+    if (stri % 6 == 0)
+      printf("%d", mini6 * (stri / 6));
+    else if (stri % 6 >= diff)
+      printf("%d", mini6 * ((stri / 6) + 1));
+    else
+      printf("%d", mini6 * (stri / 6) + mini * (stri % 6));
+  }
+}
